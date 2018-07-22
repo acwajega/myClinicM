@@ -39,6 +39,7 @@ qry_action.query('select * from admin_users where au_username = ? and au_passwor
 		else
 		{
 			console.log('executing query 2');
+
 				if (results.length === 0){
 					//-----------The Access Code is Not Valid
 					res.end(JSON.stringify({ resp:"err",err: 'Sorry the Admin User Account provided is not Valid' }));
@@ -58,7 +59,7 @@ qry_action.query('select * from admin_users where au_username = ? and au_passwor
                 console.log('executing query 6');
 
                 //------------------------CHECKING IF THE CLINIC ACCOUNT HAS ALREADY BEEN CREATED-------
-                qry_action.querry('select * from mcm_clients_info where MCI_NAME = ? ',[newAccountDetails.clinic_name],function(err,results){
+                qry_action.query('select * from mcm_clients_info where MCI_NAME = ? ',[newAccountDetails.clinic_name],function(err,results){
 					if (err)
 					{
 						console.log('executing query 7');
@@ -72,7 +73,7 @@ qry_action.query('select * from admin_users where au_username = ? and au_passwor
 							console.log('executing query 9');
 							//-------------Clinic is New------
 									//------------------------inserting into mcm_clients_info
-				qry_action.querry('insert into mcm_clients_info set ?  ',{MCI_NAME:newAccountDetails.clinic_name,
+				qry_action.query('insert into mcm_clients_info set ?  ',{MCI_NAME:newAccountDetails.clinic_name,
 					MCM_LOCATION:newAccountDetails.clinic_address,MCI_MOB_TEL:newAccountDetails.clinic_tel,MCI_EMAIL:newAccountDetails.clinic_email,MCI_ACCESS_CODE:access_code},function(err,results){
 
 console.log('executing query 10');
