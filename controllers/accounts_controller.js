@@ -68,6 +68,7 @@ qry_action.query('select * from admin_users where au_username = ? and au_passwor
 					}
 					else
 					{
+						
 						console.log('executing query 8');
 						if (results.length === 0){
 							console.log('executing query 9');
@@ -75,7 +76,7 @@ qry_action.query('select * from admin_users where au_username = ? and au_passwor
 									//------------------------inserting into mcm_clients_info
 				qry_action.query('insert into mcm_clients_info set ?  ',{MCI_NAME:newAccountDetails.clinic_name,
 					MCM_LOCATION:newAccountDetails.clinic_address,MCI_MOB_TEL:newAccountDetails.clinic_tel,MCI_EMAIL:newAccountDetails.
-					clinic_email,MCI_ACCESS_CODE:access_code},function(err,results){
+					clinic_email,MCI_ACCESS_CODE:access_code,MCI_STAFF_ID:user_account},function(err,results){
 
 console.log('executing query 10');
 					if (err){
