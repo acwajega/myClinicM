@@ -34,45 +34,56 @@ qry_action.query('select * from admin_users where au_username = ? and au_passwor
 
 	if (err){
 			 res.end(JSON.stringify({ resp:"err",err: 'An error occured while executing the querry' }));
+			 console.log('executing query 1');
 		}
 		else
 		{
+			console.log('executing query 2');
 				if (results.length === 0){
 					//-----------The Access Code is Not Valid
 					res.end(JSON.stringify({ resp:"err",err: 'Sorry the Admin User Account provided is not Valid' }));
-
+					
 			}
 			else
 			{
+				console.log('executing query 3');
 				
 				var user_account = results[0].au_id; 
 
 
-
+				console.log('executing query 4');
 				var hat = require('hat');
+				console.log('executing query 5');
                 var access_code = hat().substring(0,4)+mdate.substring(0,3) ;
+                console.log('executing query 6');
 
                 //------------------------CHECKING IF THE CLINIC ACCOUNT HAS ALREADY BEEN CREATED-------
                 qry_action.querry('select * from mcm_clients_info where MCI_NAME = ? ',[newAccountDetails.clinic_name],function(err,results){
 					if (err)
 					{
+						console.log('executing query 7');
+						
 
 					}
 					else
 					{
+						console.log('executing query 8');
 						if (results.length === 0){
+							console.log('executing query 9');
 							//-------------Clinic is New------
 									//------------------------inserting into mcm_clients_info
 				qry_action.querry('insert into mcm_clients_info set ?  ',{MCI_NAME:newAccountDetails.clinic_name,
 					MCM_LOCATION:newAccountDetails.clinic_address,MCI_MOB_TEL:newAccountDetails.clinic_tel,MCI_EMAIL:newAccountDetails.clinic_email,MCI_ACCESS_CODE:access_code},function(err,results){
 
-
+console.log('executing query 10');
 					if (err){
+						console.log('executing query 11');
 					return   res.end(JSON.stringify({ resp:"err",err: 'Sorry, An error occured while creating this account' }));
-
+					console.log('executing query 12');
 				}
 				else
 				{
+					console.log('executing query 13');
 					return   res.end(JSON.stringify({ resp:"pass",access_code: access_code }));
 
 
@@ -82,6 +93,7 @@ qry_action.query('select * from admin_users where au_username = ? and au_passwor
 						}
 						else
 						{
+							console.log('executing query 14');
 							return   res.end(JSON.stringify({ resp:"err",err: 'Sorry, An exisiting account for this clinic is already created' }));
 
 
