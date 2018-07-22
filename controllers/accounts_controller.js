@@ -74,11 +74,13 @@ qry_action.query('select * from admin_users where au_username = ? and au_passwor
 							//-------------Clinic is New------
 									//------------------------inserting into mcm_clients_info
 				qry_action.query('insert into mcm_clients_info set ?  ',{MCI_NAME:newAccountDetails.clinic_name,
-					MCM_LOCATION:newAccountDetails.clinic_address,MCI_MOB_TEL:newAccountDetails.clinic_tel,MCI_EMAIL:newAccountDetails.clinic_email,MCI_ACCESS_CODE:access_code},function(err,results){
+					MCM_LOCATION:newAccountDetails.clinic_address,MCI_MOB_TEL:newAccountDetails.clinic_tel,MCI_EMAIL:newAccountDetails.
+					clinic_email,MCI_ACCESS_CODE:access_code},function(err,results){
 
 console.log('executing query 10');
 					if (err){
 						console.log('executing query 11');
+						throw err;
 					return   res.end(JSON.stringify({ resp:"err",err: 'Sorry, An error occured while creating this account' }));
 					console.log('executing query 12');
 				}
