@@ -48,8 +48,9 @@ qry_action.query('select * from admin_users where au_username = ? and au_passwor
 			else
 			{
 				console.log('executing query 3');
+				console.log(results[0]);
 				
-				var user_account = results[0].au_id; 
+				var user_account = results[0].AU_ID; 
 
 
 				console.log('executing query 4');
