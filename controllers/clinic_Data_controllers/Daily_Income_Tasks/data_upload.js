@@ -51,7 +51,7 @@
 		                      	//----Has INserted
 		                      	console.log(results.insertId);
 		                      	//----------------------Getting the users of the specific clinic access code------
-				 		qry_action.query('select * from users_info where ui_mci_access_code = ? ',[row.DI_MCI_CODE], function(err,results){
+				 		qry_action.query('select * from users_info where ui_mci_access_code = ? ',[row.DI_MCI_CODE], async function(err,results){
 
 				 			if (err){
 				 				throw err;
@@ -76,7 +76,7 @@
 
 
 				                              	//----------------Getting the maximum record ID-----
-				 						 qry_action.query('select max(di_id) as ID from daily_incomes', function(err, result) {
+				 						 qry_action.query('select max(di_id) as ID from daily_incomes', async function(err, result) {
 		                               if (err) throw err; 
 
 

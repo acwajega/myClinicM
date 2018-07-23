@@ -36,7 +36,7 @@ var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
 
 		if (err) throw err;
 
-		if (results.length ==0){
+		if (results.length ===0){
 			res.end(JSON.stringify({ resp:"err",err: 'You do not have access to the myClinic Server!!' }));
 		}
 		else
