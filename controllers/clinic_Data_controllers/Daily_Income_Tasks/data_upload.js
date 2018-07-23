@@ -79,7 +79,7 @@
 
 
 
-		                               var RecordId = results[0].DI_ID;
+		                               var RecordId = results[0].ID;
 
 
 		                                           	//-----------------Insert into daily_income_user_sync----------------
