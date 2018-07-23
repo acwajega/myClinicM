@@ -14,7 +14,7 @@ module.exports.UploadClinicDailyIncome = function(req,res){
 		var _=require("underscore");
 
 		console.log(UploadDetails);
-		var jsonObject=JSON.parse(UploadDetails);
+		var jsonObject=JSON.parse(JSON.stringify(UploadDetails));
 
 		//--------------------Going through all the rows of json objects
 		_.each(jsonObject, function(data_obj) {
