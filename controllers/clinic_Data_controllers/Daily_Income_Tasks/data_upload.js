@@ -75,7 +75,7 @@
 
 				                              	var RecordId =0;
 				                              	//----------------Getting the maximum record ID-----
-				 						 qry_action.query('select max(di_id) as ID from ', function(err, result) {
+				 						 qry_action.query('select max(di_id) as ID from daily_incomes', function(err, result) {
 		                               if (err) throw err;         
 		                               RecordId = results[0].DI_ID;                    
 		                                      });
