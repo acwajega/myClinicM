@@ -35,18 +35,22 @@
 
 				 	//------------if there is no error
 				 	//---------------If no data has been entred-----------
-				 	if (results.length ==0){
+				 	if (results.length ===0){
 
 
 				 		//-------------------Inserting into the daily incomes table
 				 		 qry_action.query('insert into daily_incomes set ?',row, function(err, results) {
-		                      if (err) throw err;
+		                      if (err) {
+		                      	throw err;
 
-		                   console.log(results.insertId);
+		                      }
+		                      else
+		                      {
 
 
-
-				 		//----------------------Getting the users of the specific clinic access code------
+		                      	//----Has INserted
+		                      	console.log(results.insertId);
+		                      	//----------------------Getting the users of the specific clinic access code------
 				 		qry_action.query('select * from users_info where ui_mci_access_code = ? ',[row.DI_MCI_CODE], function(err,results){
 
 				 			if (err){
@@ -54,7 +58,7 @@
 				 			}
 				 			else
 				 			{
-				 				if (results.length ==0){
+				 				if (results.length ===0){
 									//------------The Acess Code has no users-------		
 
 				 				}
@@ -125,17 +129,11 @@
 
 				 		//----------------------End of Getting users of the specific access code -------
 
-
-
-
-
+		                      }             
 
 
 		                         });
 				 		//-------------------End of Inserting into the daily incomes table
-
-
-
 
 				 	}
 
@@ -151,13 +149,7 @@
 				 	}
 
 
-
-
-
 				 });
-
-
-
 
 
 			});
