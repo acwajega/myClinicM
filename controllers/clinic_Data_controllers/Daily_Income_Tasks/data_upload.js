@@ -73,15 +73,16 @@
 				                              var trans_obj = JSON.parse(JSON.stringify(trans_record));
 
 
-				                              	var RecordId =0;
 				                              	//----------------Getting the maximum record ID-----
 				 						 qry_action.query('select max(di_id) as ID from daily_incomes', function(err, result) {
-		                               if (err) throw err;         
-		                               RecordId = results[0].DI_ID;                    
-		                                      });
-				 				        	//--------------------End of Getting the maximum Record Id
+		                               if (err) throw err; 
 
-				                              	//-----------------Insert into daily_income_user_sync----------------
+
+
+		                               var RecordId = results[0].DI_ID;
+
+
+		                                           	//-----------------Insert into daily_income_user_sync----------------
 				                              	 //-------------Getting the request datae and time
 											var d = new Date(); 
 											var mdate = d.getFullYear() +'-'+(d.getMonth()+1)+'-'+d.getDate() ;
@@ -102,7 +103,14 @@
 
 
 				                              	//------------------End of Insert into daily_income_user_sync 
+            
+		                               
 
+
+		                                      });
+				 				        	//--------------------End of Getting the maximum Record Id
+
+				                          
 
 
 
