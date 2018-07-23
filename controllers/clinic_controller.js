@@ -111,7 +111,7 @@ var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
 			//-----------------Geting the record-----------------------------
 
 			qry_action.query('select * from daily_incomes where di_mci_code =? and di_sync_status =?',
-    [querryData.accessCode,'N'], function (err, results){
+    [reqDetails.accessCode,'N'], function (err, results){
     	   if (err){
    
    throw(err);
