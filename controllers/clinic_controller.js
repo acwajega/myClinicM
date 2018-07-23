@@ -97,7 +97,7 @@ var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
 	
 
 	//----------------------Checking if the provided access details from the user are valid------
-	qry_action.query('selcet * from users_info where ui_username = ? and ui_password = ? and ui_mci_access_code = ?',[reqDetails.username,reqDetails.password,reqDetails.accessCode],function(err,results){
+	qry_action.query('select * from users_info where ui_username = ? and ui_password = ? and ui_mci_access_code = ?',[reqDetails.username,reqDetails.password,reqDetails.accessCode],function(err,results){
 
 		if (err) throw err;
 
