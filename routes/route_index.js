@@ -14,8 +14,6 @@ var accounts_controller = require('../controllers/accounts_controller.js');
 var clinic_controller = require('../controllers/clinic_controller.js');
 var clinic_controller_DailyIncomeTasks_dataUpload =require('../controllers/clinic_Data_controllers/Daily_Income_Tasks/data_upload.js');
 var clinic_controller_DailyIncomeTasks_dataSync =require('../controllers/clinic_Data_controllers/Daily_Income_Tasks/data_sync.js');
-
-
 //------------END OF CLINIC DATA CONTROLLERS--------------------------
 //=======================================================================
 
