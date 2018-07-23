@@ -57,7 +57,10 @@ db_controller.CONNECT_TO_DATABASE();
  //*****************************    ROUTING *******************************************************************
     app.post('/api/accounts/createNewClinicAccount',route_index);//--------Create New User Account
     app.post('/api/accounts/createNewUserAccount',route_index);//--------Create New User Account
-    app.post('/api/clinicData/Upload',route_index);//--------Create New User Account
+
+
+    app.post('/api/clinicData/Upload/DailyIncome',route_index);//--------Upload DailyIncome
+    app.post('/api/clinicData/Sync/DailyIncome',route_index);//--------Sync DailyIncome
 
 //***************************** END OF ROUTING ****************************************************************
 

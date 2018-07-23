@@ -8,7 +8,6 @@ var url = require('url');
 
 //--------------------------Uploading  Clinic Daily income
 module.exports.UploadClinicDailyIncome = function(req,res){
-	console.log('1');
 		var UploadDetails = req.body;//-----------Getting the new Account details
 
 		var _=require("underscore");
@@ -21,8 +20,6 @@ module.exports.UploadClinicDailyIncome = function(req,res){
 
 			//----------------Getting a row object
 			 var row =JSON.parse(JSON.stringify(data_obj));
-
-console.log('2');
 			 //------------Checking if data has already been uploaded------------
 			 qry_action.query('SELECT * FROM daily_incomes WHERE di_date = ? and di_mci_code =?',[row.DI_DATE,row.DI_MCI_CODE] , function(err, result) {
 			 	
@@ -38,6 +35,9 @@ console.log('2');
     
                        console.log(result.insertId);
                              });
+
+
+
 			 	}
 
 			 	//--------------If data has been uploaded
@@ -67,7 +67,126 @@ console.log('2');
 return   res.end(JSON.stringify({ resp:"pass",msg:'Daily Income Upload Successfull'}));
 
 }
-
-
-
 //-----------------------End of Uploading Clinic Daily Income
+
+
+
+
+
+
+
+//--------------------------Synching  Clinic Daily income
+module.exports.SyncClinicDailyIncome = function(req,res){
+
+var reqDetails = req.body;//-----------Getting the new Account details
+
+//-----Getting the request Ip 
+var ip = req.headers['x-forwarded-for'] || 
+req.connection.remoteAddress || 
+req.socket.remoteAddress ||
+req.connection.socket.remoteAddress;
+//---------------End of Getting the request ip
+
+//-------------Getting the request datae and time
+var d = new Date(); 
+var mdate = d.getFullYear() +'-'+(d.getMonth()+1)+'-'+d.getDate() ;
+
+var time = new Date();
+var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
+//-------------End of Getting the request date and time
+	
+
+	//----------------------Checking if the provided access details from the user are valid------
+	qry_action.query('selcet * from users_info where ui_username = ? and ui_password = ? and ui_mci_access_code = ?',[reqDetails.username,reqDetails.password,reqDetails.accessCode],function(err,results){
+
+		if (err) throw err;
+
+		if (result.length ==0){
+			res.end(JSON.stringify({ resp:"err",err: 'You do not have access to the myClinic Server!!' }));
+		}
+		else
+		{
+			var user_id = results[0].UI_ID;
+		
+			//-----------------Geting the record-----------------------------
+
+			qry_action.query('select * from daily_incomes where di_mci_code =? and di_sync_status =?',
+    [querryData.accessCode,'N'], function (err, results){
+    	   if (err){
+   
+   throw(err);
+   
+   }
+
+   else
+   {
+   		 //-------is there is no data
+   if (results.length ===0){
+   
+   
+    res.end(JSON.stringify([]));
+   
+   
+   }
+
+   else
+   {
+   	//-----------There is data--------
+   	 //------Updating the sync status
+   for (var i = 0; i < results.length; i++){
+   
+          var trans_record = results[i];  
+ 		     var trans_obj = JSON.parse(JSON.stringify(trans_record));
+               
+               //updating the sync status 
+               qry_action.query('UPDATE daily_incomes SET  di_sync_status =? where di_id =?',['Y',trans_obj.DI_ID], function (err, results){
+               if (err){
+               
+               throw(err);
+               }
+               else
+               {
+               
+               
+               }
+               
+               
+               
+               
+               
+               });
+               
+               
+               
+ 
+ 		}
+  
+   res.end(JSON.stringify(results));
+
+   }
+
+
+
+   }
+
+
+
+
+
+    });
+
+
+
+		}
+
+
+
+	});
+
+
+
+
+
+	}
+
+//---------------------------------End of Synching Clinic Daily Income
