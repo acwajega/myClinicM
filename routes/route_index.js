@@ -12,8 +12,8 @@ var accounts_controller = require('../controllers/accounts_controller.js');
 //------------CLINIC DATA CONTROLLERS--------------------------------
 
 //var clinic_controller = require('../controllers/clinic_controller.js');
-var clinic_controller_DailyIncomeTasks_dataUpload =require('../controllers/Clinic_data_controllers/Daily_IncomeTasks/data_upload.js');
-var clinic_controller_DailyIncomeTasks_dataSync =require('../controllers/Clinic_data_controllers/Daily_IncomeTasks/data_sync.js');
+var clinic_controller_DailyIncomeTasks_dataUpload =require('../controllers/clinic_Data_controllers/Daily_Income_Tasks/data_upload.js');
+var clinic_controller_DailyIncomeTasks_dataSync =require('../controllers/clinic_Data_controllers/Daily_Income_Tasks/data_sync.js');
 
 
 //------------END OF CLINIC DATA CONTROLLERS--------------------------
