@@ -49,7 +49,7 @@
 
 
 				 		//----------------------Getting the users of the specific clinic access code------
-				 		qry_action.query('select * from users_info where ui_mci_id = ? ',[row.DI_MCI_CODE], function(err,results){
+				 		qry_action.query('select * from users_info where ui_mci_access_code = ? ',[row.DI_MCI_CODE], function(err,results){
 
 				 			if (err){
 				 				throw err;
