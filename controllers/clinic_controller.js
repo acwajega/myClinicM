@@ -64,7 +64,7 @@ console.log('2');
 		});
 
 
-
+return   res.end(JSON.stringify({ resp:"pass",msg:'Daily Income Upload Successfull'}));
 
 }
 
