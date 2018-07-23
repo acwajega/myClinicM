@@ -81,7 +81,7 @@
 
 
 
-		                               var RecordId = result[0].ID;
+		                               var RecordId = await result[0].ID;
 		                               console.log('----'+RecordId+'------');
 
 
