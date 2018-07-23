@@ -12,6 +12,8 @@ module.exports.UploadClinicDailyIncome = function(req,res){
 		var UploadDetails = req.body;//-----------Getting the new Account details
 
 		var _=require("underscore");
+
+		console.log(UploadDetails);
 		var jsonObject=JSON.parse(UploadDetails);
 
 		//--------------------Going through all the rows of json objects
