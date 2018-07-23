@@ -9,7 +9,7 @@ var url = require('url');
 //--------------------------Uploading  Clinic Daily income
 module.exports.UploadClinicDailyIncome = function(req,res){
 		var UploadDetails = req.body;//-----------Getting the new Account details
-
+		console.log(req.body);
 		var _=require("underscore");
 
 		console.log(UploadDetails);
