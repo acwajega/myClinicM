@@ -76,13 +76,13 @@
 
 
 				                              	//----------------Getting the maximum record ID-----
-				 						 qry_action.query('select max(di_id) as ID from daily_incomes', async function(err, result) {
+				 						 qry_action.query('select max(di_id) as ID from daily_incomes', await function(err, result) {
 		                               if (err) throw err; 
 
 
 
-		                               var RecordId = await result[0].ID;
-		                               console.log('----'+RecordId+'------');
+		                               var RecordId = result[0].ID;
+		                              console.log('----'+RecordId+'------');
 
 
 		                                           	//-----------------Insert into daily_income_user_sync----------------
@@ -94,9 +94,14 @@
 											var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
 											//-------------End of Getting the request date and time
 
-				                              	qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID:trans_obj.UI_ID,DIUS_DI_ID :RecordId,DIUS_DATE:mdate,DIUS_TIME:m_time },function(err,results){
+				                              	qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID:trans_obj.UI_ID,DIUS_DI_ID :RecordId,DIUS_DATE:mdate,DIUS_TIME:m_time },async function(err,results){
 				                              		if (err){
 				 											throw err;
+				 									}
+				 									else
+				 									{
+				 										console.log(results.insertId);
+
 				 									}
 
 
