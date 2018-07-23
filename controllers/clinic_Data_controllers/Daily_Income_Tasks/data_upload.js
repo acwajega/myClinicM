@@ -13,6 +13,8 @@ var url = require('url');
 
 //--------------------------Uploading  Clinic Daily income
 module.exports.Upload = function(req,res){
+
+	console.log('reached hia');
 		var UploadDetails = req.body;//-----------Getting the new Account details
 
 		var _=require("underscore");
