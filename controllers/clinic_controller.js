@@ -8,6 +8,7 @@ var url = require('url');
 
 //--------------------------Uploading  Clinic Daily income
 module.exports.UploadClinicDailyIncome = function(req,res){
+	console.log('1');
 		var UploadDetails = req.body;//-----------Getting the new Account details
 
 		var _=require("underscore");
@@ -19,7 +20,7 @@ module.exports.UploadClinicDailyIncome = function(req,res){
 			//----------------Getting a row object
 			 var row =JSON.parse(JSON.stringify(data_obj));
 
-
+console.log('2');
 			 //------------Checking if data has already been uploaded------------
 			 qry_action.query('SELECT * FROM daily_incomes WHERE di_date = ? and di_mci_code =?',[row.DI_DATE,row.DI_MCI_CODE] , function(err, result) {
 			 	
