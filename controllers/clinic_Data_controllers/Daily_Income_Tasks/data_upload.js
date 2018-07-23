@@ -78,7 +78,7 @@
 
 
 		                               var RecordId = result[0].ID;
-		                               onsole.log('----'+RecordId+'------');
+		                               console.log('----'+RecordId+'------');
 
 
 		                                           	//-----------------Insert into daily_income_user_sync----------------
