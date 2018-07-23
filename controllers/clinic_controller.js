@@ -33,7 +33,7 @@ console.log('2');
 			 	//---------------If no data has been entred-----------
 			 	if (result.length ==0){
 
-			 		 connection.query('insert into daily_incomes set ?',row, function(err, result) {
+			 		 qry_action.query('insert into daily_incomes set ?',row, function(err, result) {
                           if (err) throw err;
     
                        console.log(result.insertId);
@@ -43,7 +43,7 @@ console.log('2');
 			 	//--------------If data has been uploaded
 			 	else
 			 	{
-			 		 connection.query('update daily_incomes set DI_TOTAL_AMOUNT = ?,DI_AMOUNT_PAID =?,DI_AMOUNT_NOT_PAID =?,DI_EXPENSE =? where di_date =?',[row.DI_TOTAL_AMOUNT,row.DI_AMOUNT_PAID,row.DI_AMOUNT_NOT_PAID,row.EXPENSE,row.DI_DATE] , function(err, result) {
+			 		 qry_action.query('update daily_incomes set DI_TOTAL_AMOUNT = ?,DI_AMOUNT_PAID =?,DI_AMOUNT_NOT_PAID =?,DI_EXPENSE =? where di_date =?',[row.DI_TOTAL_AMOUNT,row.DI_AMOUNT_PAID,row.DI_AMOUNT_NOT_PAID,row.EXPENSE,row.DI_DATE] , function(err, result) {
                    if (err) throw err ;
     
                   console.log(result.insertId);
