@@ -1,4 +1,10 @@
-var db_controller = require('../controllers/database_controller.js');   
+var path = require("path"),
+    fs = require("fs");
+    //fs.readFile(path.join(__dirname, '../..', 'foo.bar'))
+
+//var db_controller = require('../controllers/database_controller.js');  
+var db_controller = require(path.normalize(__dirname + "/../../database_controller.js"));  
+
 
 var qry_action = db_controller.sd_use;//-------------SQL CONNECTION GOING TO PERFORM THE CRUD ACTIONS ON USERS
 var url = require('url');
