@@ -87,7 +87,7 @@
 				 					else
 				 					{
 				 						resolve(results.insertId);
-				 						console.log('Inserted DAILY_INCOMES TABLE id----'+results[0].ID);
+				 						console.log('Inserted DAILY_INCOMES TABLE id----'+results.insertId);
 
 				 					}
 
