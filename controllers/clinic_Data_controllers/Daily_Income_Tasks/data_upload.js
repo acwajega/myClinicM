@@ -200,7 +200,7 @@ console.log('END CODE-----------------------------------------------------------
 
 
 				 							//------------------Updating the sync status------
-				 							qry_action.query('updating daily_incomes set di_sync_status = ? where di_id = ?',['N',rowM.DI_ID],function(err,result){
+				 							qry_action.query('update daily_incomes set di_sync_status = ? where di_id = ?',['Y',rowM.DI_ID],function(err,result){
 
 				 								if (err){
 				 									
