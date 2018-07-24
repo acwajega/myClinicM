@@ -156,8 +156,7 @@
 
 
 
-		return   res.end(JSON.stringify({ resp:"pass",msg:'Daily Income Upload Successfull'}));
-
+		
 
 	//-------------------------Getting the maximum inserted record Promise------------
 				 		let getMaximumInsertedRecord = function(){
@@ -281,6 +280,7 @@ InsertIntoDailyIncomesUserSyncTable().then(function(result){
 
 
 
+return   res.end(JSON.stringify({ resp:"pass",msg:'Daily Income Upload Successfull'}));
 
 
 
