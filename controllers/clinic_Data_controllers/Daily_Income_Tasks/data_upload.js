@@ -189,7 +189,7 @@
 				 			return new Promise(function(resolve,reject){
 
 
-				 				qry_action.query('select * from daily_incomes where di_sync_status = ? ',['N'],function(err,results){
+				 				qry_action.query('select * from daily_incomes ',function(err,results){
 
 				 					if (err){
 				 						throw err;
