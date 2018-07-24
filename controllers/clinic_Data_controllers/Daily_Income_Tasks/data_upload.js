@@ -162,10 +162,10 @@ console.log('END CODE-----------------------------------------------------------
 
 				 						var RecordId =0;
 				 						for (var i = 0; i < results.length; i++){
+				 							 (function(i) {
 				 							let RCount = i;
 
 				 							console.log('*****Record Count----'+RCount);
-
 
 				 							RecordId = results[i].DI_ID;
 
@@ -182,8 +182,8 @@ console.log('END CODE-----------------------------------------------------------
 				 					{
 				 						var Xo = RecordId;
 				 						for (var i = 0; i < results.length; i++){
+				 							 (function(i) {
 
-				 							
 				 							
 				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID : results[i].UI_ID,DIUS_DI_ID:Xo },function(err,result){
 
@@ -200,9 +200,10 @@ console.log('END CODE-----------------------------------------------------------
 				 								}
 
 				 							});
+				 							})(i);
 
 
-				 						}
+				 						}//-----End of For Loop
 
 				 					}
 
@@ -213,8 +214,8 @@ console.log('END CODE-----------------------------------------------------------
 				 							
 
 
-
-				 						}
+				 						})(i);
+				 						}//---------------End of For loop
 
 				 					}
 
