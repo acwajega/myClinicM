@@ -132,7 +132,34 @@
 
 
 
-				 		//-------------------------Getting the maximum inserted record Promise------------
+				 	
+
+
+
+
+
+				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
+
+				 	 await checkIfRecordHasBeenEntred().then(function(result){
+				 	   	
+
+				 			return insertIntoDailyIncomes();
+
+				 		}).catch(function(result){
+				 			return upDateDailyIncome();
+				 		})
+
+
+	 });
+
+
+
+
+
+		return   res.end(JSON.stringify({ resp:"pass",msg:'Daily Income Upload Successfull'}));
+
+
+	//-------------------------Getting the maximum inserted record Promise------------
 				 		let getMaximumInsertedRecord = function(){
 
 				 			return new Promise(function(resolve,reject){
@@ -160,8 +187,25 @@
 
 				 		let InsertIntoDailyIncomesUserSyncTable = function(max_id){
 				 			return new Promise(function(resolve,reject){
+
+
+				 				qry_action.query('select * from daily_incomes where di_sync_status = ? ',['N'],function(err,results){
+
+				 					if (err){
+				 						throw err;
+				 					}
+				 					else
+				 					{
+
+				 						var RecordId =0;
+				 						for (var i = 0; i < results.length; i++){
+				 							RecordId = results[i].DI_ID;
+
+
+
+
 				 				//---------Getting all the users with the same access code------
-				 				qry_action.query('select * from users_info where ui_mci_access_code = ?',row.DI_MCI_CODE,function(err,results){
+				 				qry_action.query('select * from users_info where ui_mci_access_code = ?',results[i].DI_MCI_CODE,function(err,results){
 				 					if (err){
 				 						reject('error executing the query');
 
@@ -169,7 +213,7 @@
 				 					else
 				 					{
 				 						for (var i = 0; i < results.length; i++){
-				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID : results[i].UI_ID,DIUS_DI_ID:max_id},function(err,result){
+				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID : results[i].UI_ID,DIUS_DI_ID:RecordId},function(err,result){
 
 				 								if (err){
 				 									reject('error executing the query');
@@ -193,7 +237,28 @@
 
 				 				});
 
-				 				//------------------End of Getting users with the same acess code
+				 				//------------------End of Getting users with the same acess cod
+				 							
+
+
+
+				 						}
+
+				 					}
+
+
+				 				});
+
+
+
+
+
+
+
+
+
+
+e
 
 
 
@@ -211,31 +276,25 @@
 
 
 
-				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
-
-				 	 await checkIfRecordHasBeenEntred().then(function(result){
-				 	   	
-
-				 			return insertIntoDailyIncomes();
-
-				 		}).then(function(result){
-				 		
-				 			return getMaximumInsertedRecord();
-				 		}).then(function(result){
-				 			console.log(result);
-				 			return InsertIntoDailyIncomesUserSyncTable(result);
-				 		}).catch(function(result){
-				 			return upDateDailyIncome();
-				 		})
-
-
-	 });
 
 
 
 
 
-		return   res.end(JSON.stringify({ resp:"pass",msg:'Daily Income Upload Successfull'}));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		}
 		//-----------------------End of Uploading Clinic Daily Income
