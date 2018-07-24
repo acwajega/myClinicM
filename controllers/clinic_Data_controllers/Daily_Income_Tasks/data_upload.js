@@ -152,7 +152,7 @@ console.log('END CODE-----------------------------------------------------------
 				 				console.log('REACHED HIAE------------------------------------------------------------');
 
 
-				 				qry_action.query('select * from daily_incomes  ',function(err,results){
+				 				qry_action.query('select * from daily_incomes where di_sync_status = ?  ',['N'],function(err,results){
 
 				 					if (err){
 				 						throw err;
@@ -196,7 +196,35 @@ console.log('END CODE-----------------------------------------------------------
 				 								}
 
 				 							});
+
+
+				 							//------------------Updating the sync status------
+				 							qry_action.query('updating daily_incomes set di_sync_status = ? where di_id = ?',['N',rowM.DI_ID],function(err,result){
+
+				 								if (err){
+				 									
+
+				 								}
+				 								else
+				 								{
+				 								
+				 									
+
+				 								}
+
+				 							});
+
+
+
+
+
+				 							//-------------------End of Updating sync sttaus
+
+
 				 							})(userRow);
+
+
+
 
 
 				 						}//-----End of For Loop

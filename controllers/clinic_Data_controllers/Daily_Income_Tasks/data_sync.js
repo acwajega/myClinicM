@@ -69,6 +69,8 @@ var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
    	//-----------There is data--------
    	 //------Updating the sync status
    for (var i = 0; i < results.length; i++){
+
+
    
           var trans_record = results[i];  
  		     var trans_obj = JSON.parse(JSON.stringify(trans_record));
