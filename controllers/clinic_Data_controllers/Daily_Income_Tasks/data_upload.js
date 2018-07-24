@@ -26,8 +26,7 @@
 			//--------------------Going through all the rows of json objects
 			_.each(jsonObject, async function(data_obj) {
 
-
-				let count =count+1;
+                count =count+1;
 				console.log('Record----'+count);
 
 				//----------------Getting a row object
