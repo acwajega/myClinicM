@@ -21,9 +21,11 @@
 
 			console.log(UploadDetails);
 			var jsonObject=JSON.parse(JSON.stringify(UploadDetails));
+			var count = 0;
 
 			//--------------------Going through all the rows of json objects
 			_.each(jsonObject, function(data_obj) {
+				console.log('Record----'+count+1);
 
 				//----------------Getting a row object
 				 var row =JSON.parse(JSON.stringify(data_obj));
@@ -168,6 +170,8 @@
 				 								}
 				 								else
 				 								{
+				 									console.log('Inserted id----'+results[0].ID);
+
 				 									resolve(results[0].ID);
 
 				 								}
