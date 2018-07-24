@@ -23,12 +23,12 @@
 			var jsonObject=JSON.parse(JSON.stringify(UploadDetails));
 
 			//--------------------Going through all the rows of json objects
-			_.each(jsonObject, function(data_obj) {
+			_.each(jsonObject, async function(data_obj) {
 
 				//----------------Getting a row object
 				 var row =JSON.parse(JSON.stringify(data_obj));
 				 //------------Checking if data has already been uploaded------------
-				 qry_action.query('SELECT * FROM daily_incomes WHERE di_date = ? and di_mci_code =?',[row.DI_DATE,row.DI_MCI_CODE] , function(err, results) {
+				 await qry_action.query('SELECT * FROM daily_incomes WHERE di_date = ? and di_mci_code =?',[row.DI_DATE,row.DI_MCI_CODE] , async function(err, results) {
 				 	
 				 	//-------------If there is an error with the query
 				 	if (err) throw err;
@@ -140,7 +140,7 @@
 
 
 				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
-				 		insertIntoDailyIncomes().then(async function(result){
+				 		await insertIntoDailyIncomes().then(async function(result){
 				 			return await getMaximumInsertedRecord();
 				 		}).then(async function(result){
 				 			return await InsertIntoDailyIncomesUserSyncTable(result);
