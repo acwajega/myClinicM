@@ -140,12 +140,12 @@
 
 
 				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
-				 		insertIntoDailyIncomes().then(function(result){
-				 			return getMaximumInsertedRecord();
-				 		}).then(function(result){
-				 			return InsertIntoDailyIncomesUserSyncTable(result);
-				 		}).then(function(result){
-				 			console.log(result);
+				 		insertIntoDailyIncomes().then(async function(result){
+				 			return await getMaximumInsertedRecord();
+				 		}).then(async function(result){
+				 			return await InsertIntoDailyIncomesUserSyncTable(result);
+				 		}).then(async function(result){
+				 			console.log(await result);
 				 		});
 
 				 		//----------------------------END OF TRAIN FUNCTIONLAITY
