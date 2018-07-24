@@ -209,7 +209,7 @@
 
 				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
 
-				 	   checkIfRecordHasBeenEntred().then(function(result){
+				 	 await checkIfRecordHasBeenEntred().then(function(result){
 				 	   	
 				 			return insertIntoDailyIncomes();
 
