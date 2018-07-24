@@ -199,6 +199,7 @@
 
 				 						var RecordId =0;
 				 						for (var i = 0; i < results.length; i++){
+				 							var T = i;
 
 
 				 							RecordId = results[i].DI_ID;
@@ -215,6 +216,7 @@
 				 					else
 				 					{
 				 						for (var i = 0; i < results.length; i++){
+
 				 							
 				 							var Xo = RecordId;
 				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID : results[i].UI_ID,DIUS_DI_ID:c},function(err,result){
@@ -225,7 +227,7 @@
 				 								}
 				 								else
 				 								{
-				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+count);
+				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+T);
 
 				 									resolve(results.insertId);
 
@@ -264,10 +266,17 @@
 
 
 
-InsertIntoDailyIncomesUserSyncTable();
 
 
 
+InsertIntoDailyIncomesUserSyncTable().then(function(result){
+				 	   	
+
+				 			console.log(result);
+
+				 		}).catch(function(result){
+				 			console.log(result);
+				 		})
 
 
 
