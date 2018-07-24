@@ -129,15 +129,6 @@
 					 		}
 
 				 		//---------------------END OF UPDATING DAILY INCOMES PROMISE
-
-
-
-				 	
-
-
-
-
-
 				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
 
 				 	 await checkIfRecordHasBeenEntred().then(function(result){
@@ -153,15 +144,12 @@
 	 });
 
 
-
-
-
-
-
-				 		//------------------------------INSERTING INTO THE DAILY_INCOMES_USER_SYNC_TABLE PROMISE---------
+console.log('END CODE------------------------------------------------------------');
+//------------------------------INSERTING INTO THE DAILY_INCOMES_USER_SYNC_TABLE PROMISE---------
 
 				 		let InsertIntoDailyIncomesUserSyncTable = function(){
 				 			return new Promise(function(resolve,reject){
+				 				console.log('REACHED HIAE------------------------------------------------------------');
 
 
 				 				qry_action.query('select * from daily_incomes  ',function(err,results){
@@ -204,7 +192,7 @@
 				 								}
 				 								else
 				 								{
-				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+T);
+				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+Xo);
 
 				 									resolve(results.insertId);
 
@@ -241,10 +229,6 @@
 
 				 		//------------------------------END OF INSERTING INTO THE DAILY_INCOMES_USER_SYNC_TABLE PROMISE---------
 
-
-
-
-console.log('END CODE------------------------------------------------------------');
 
 InsertIntoDailyIncomesUserSyncTable();
 
