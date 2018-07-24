@@ -148,7 +148,7 @@ console.log('END CODE-----------------------------------------------------------
 //------------------------------INSERTING INTO THE DAILY_INCOMES_USER_SYNC_TABLE PROMISE---------
 
 				 		let InsertIntoDailyIncomesUserSyncTable = function(){
-				 			return new Promise(function(resolve,reject){
+				 		
 				 				console.log('REACHED HIAE------------------------------------------------------------');
 
 
@@ -219,8 +219,7 @@ console.log('END CODE-----------------------------------------------------------
 				 				});
 
 
-				 			});
-
+				 		
 
 
 				 		}
