@@ -156,35 +156,11 @@
 
 
 
-		
-
-	//-------------------------Getting the maximum inserted record Promise------------
-				 		let getMaximumInsertedRecord = function(){
-
-				 			return new Promise(function(resolve,reject){
-				 					qry_action.query('select max(di_id) as "ID" from daily_incomes ',function(err,results){
-
-				 					if (err){
-				 						reject('error executing the query');
-
-				 					}
-				 					else
-				 					{
-				 						resolve(results[0].ID);
-
-				 					}
-
-
-				 				});
-
-				 			});
-				 		}
-				 		//-------------------------End of Getting the maximum inserted record Promise------------
 
 
 				 		//------------------------------INSERTING INTO THE DAILY_INCOMES_USER_SYNC_TABLE PROMISE---------
 
-				 		let InsertIntoDailyIncomesUserSyncTable = function(max_id){
+				 		let InsertIntoDailyIncomesUserSyncTable = function(){
 				 			return new Promise(function(resolve,reject){
 
 
