@@ -213,7 +213,9 @@
 				 					else
 				 					{
 				 						for (var i = 0; i < results.length; i++){
-				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID : results[i].UI_ID,DIUS_DI_ID:RecordId},function(err,result){
+				 							var c =RecordId;
+
+				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID : results[i].UI_ID,DIUS_DI_ID:c},function(err,result){
 
 				 								if (err){
 				 									reject('error executing the query');
