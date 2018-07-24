@@ -52,7 +52,7 @@
 		                      	await console.log(results.insertId);
 
 		                      	//--------------------------Getting the maximum id from the insert statement----------
-		                      	qry_action.query('select max(di_id) as RECORD_ID from daily_incomes', async function (err,results){
+		                      	await qry_action.query('select max(di_id) as RECORD_ID from daily_incomes', async function (err,results){
 		                      		  if (err) {
 		                      	throw err;
 
@@ -63,7 +63,7 @@
 		                      	await console.log('--'+RECORD_ID+'----');
 
 		                      	//----------------------Getting users with the same access code and inserting the record to their mail box-------
-		                      	qry_action.query('select * from users_info where ui_mci_access_code = ? ',[row.DI_MCI_CODE], async function(err,results){
+		                      	await qry_action.query('select * from users_info where ui_mci_access_code = ? ',[row.DI_MCI_CODE], async function(err,results){
 
 		                      		if (err){
 		                      			throw err;
@@ -82,7 +82,7 @@
 											var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
 											//-------------End of Getting the request date and time
 		                      				//------------------inserting the record ingo the daily_income_user_sync-------
-		                      				qry_action.query('insert into daily_income_user_sync set ',{DIUS_UI_ID:results[i].UI_ID,DIUS_DI_ID:RECORD_ID,DIUS_DATE:mdate,DIUS_TIME:m_time},async function(err,results){
+		                      				await qry_action.query('insert into daily_income_user_sync set ? ',{DIUS_UI_ID:results[i].UI_ID,DIUS_DI_ID:RECORD_ID,DIUS_DATE:mdate,DIUS_TIME:m_time},async function(err,results){
 
 		                      					if (err){
 
