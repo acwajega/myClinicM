@@ -160,19 +160,13 @@ console.log('END CODE-----------------------------------------------------------
 				 					else
 				 					{
 
-				 						var RecordId =0;
-				 						for (var i = 0; i < results.length; i++){
+				 					
+				 				for (var i = 0; i < results.length; i++){
 
-				 							var dailyIncomeRow = results[i];
-				 							 (function(rowM) {
-				 							let RCount = i;
+				 					var dailyIncomeRow = results[i];
 
-				 							console.log('*****Record Count----'+RCount);
-
-				 							RecordId = results[i].DI_ID;
-
-
-
+				 					(function(rowM) {
+				 						
 
 				 				//---------Getting all the users with the same access code------
 				 				qry_action.query('select * from users_info where ui_mci_access_code = ?',rowM.DI_MCI_CODE,function(err,results){
@@ -182,13 +176,13 @@ console.log('END CODE-----------------------------------------------------------
 				 					}
 				 					else
 				 					{
-				 						var Xo = RecordId;
+				 					
 				 						for (var i = 0; i < results.length; i++){
 				 							var userRow = results[i];
 				 							 (function(row) {
 
 				 							
-				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID : row.UI_ID,DIUS_DI_ID:rowM.DI_ID },function(err,result){
+				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID :row.UI_ID,DIUS_DI_ID:rowM.DI_ID },function(err,result){
 
 				 								if (err){
 				 									reject('error executing the query');
@@ -196,8 +190,7 @@ console.log('END CODE-----------------------------------------------------------
 				 								}
 				 								else
 				 								{
-				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+Xo);
-
+				 								
 				 									resolve(results.insertId);
 
 				 								}
