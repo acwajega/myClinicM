@@ -38,91 +38,132 @@
 				 	if (results.length === 0){
 
 
-				 		//-------------------Inserting into the daily incomes table
-				 		 qry_action.query('insert into daily_incomes set ?',row, async function(err, results) {
-		                      if (err) {
-		                      	throw err;
+				 		//--------------------Insert into Daily INcomes promise
+				 		let insertIntoDailyIncomes = function(){
+				 			return new Promise(function(resolve,reject){
+				 				qry_action.query('insert into daily_incomes set ?',row,function(err,results){
 
-		                      }
-		                      else
-		                      {
+				 					if (err){
+				 						reject('error executing the query');
 
+				 					}
+				 					else
+				 					{
+				 						resolve(results.insertId);
 
-		                      	//----Has INserted
-		                      	await console.log(results.insertId);
-
-		                      	//--------------------------Getting the maximum id from the insert statement----------
-		                      	await qry_action.query('select max(di_id) as RECORD_ID from daily_incomes', async function (err,results){
-		                      		  if (err) {
-		                      	throw err;
-
-		                      }
-		                      else
-		                      {
-		                      	const RECORD_ID = await results[0].RECORD_ID;
-		                      	await console.log('--'+RECORD_ID+'----');
-
-		                      	//----------------------Getting users with the same access code and inserting the record to their mail box-------
-		                      	await qry_action.query('select * from users_info where ui_mci_access_code = ? ',[row.DI_MCI_CODE], async function(err,results){
-
-		                      		if (err){
-		                      			throw err;
-
-		                      		}
-		                      		else
-
-		                      		{
-		                      			//-------------------FOR LOOP--------------------------
-		                      			 for (var i = 0; i < results.length; i++){
-		                      				//-------------Getting the request datae and time
-											var d = new Date(); 
-											var mdate = d.getFullYear() +'-'+(d.getMonth()+1)+'-'+d.getDate() ;
-
-											var time = new Date();
-											var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
-											//-------------End of Getting the request date and time
-		                      				//------------------inserting the record ingo the daily_income_user_sync-------
-		                      				await qry_action.query('insert into daily_income_user_sync set ? ',{DIUS_UI_ID:results[i].UI_ID,DIUS_DI_ID:RECORD_ID,DIUS_DATE:mdate,DIUS_TIME:m_time},async function(err,results){
-
-		                      					if (err){
-
-		                      					}
-		                      					else
-		                      					{
-		                      						await console.log(results.insertId);
-		                      					}
-		                      				});
-
-		                      				//-------------------end of inserting the record ingo the daily_income_user_sync-----
+				 					}
 
 
-		                      			}
-		                      			//-------------------END OF FOR LOOP--------------------------
+				 				});
+
+				 			});
+
+				 		}
+				 		//------------------------End on Inserting ino Daily Incomes Proise
 
 
-		                      		}
+				 		//-------------------------Getting the maximum inserted record Promise------------
+				 		let getMaximumInsertedRecord = function(){
+
+				 			return new Promise(function(resoolve,reject){
+				 					qry_action.query('select max(di_id) as "ID" from daily_incomes ',function(err,results){
+
+				 					if (err){
+				 						reject('error executing the query');
+
+				 					}
+				 					else
+				 					{
+				 						resolve(results[0].ID);
+
+				 					}
 
 
-		                      	});
+				 				});
 
-		                      	//--------------------END OF Getting users with the same access code and inserting the record to their mail box-------
-		                      }
-
-
-
-		                      	});
+				 			});
+				 		}
+				 		//-------------------------End of Getting the maximum inserted record Promise------------
 
 
+				 		//------------------------------INSERTING INTO THE DAILY_INCOMES_USER_SYNC_TABLE PROMISE---------
 
-		                      	//-------------------------End of Getting the maximum id from the insert statement-----
+				 		let InsertIntoDailyIncomesUserSyncTable = function(max_id){
+				 			return new Promise(function(resolve,reject){
+				 				//---------Getting all the users with the same access code------
+				 				qry_action.query('select * from users_info where ui_mci_access_code = ?',row.DI_MCI_CODE,function(err,results){
+				 					if (err){
+				 						reject('error executing the query');
 
-		                      }             
+				 					}
+				 					else
+				 					{
+				 						for (var i = 0; i < results.length; i++){
+				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID : results[i].UI_ID,DIUS_DI_ID:max_id},function(err,result){
+
+				 								if (err){
+				 									reject('error executing the query');
+
+				 								}
+				 								else
+				 								{
+				 									resolve(results[0].ID);
+
+				 								}
+
+				 							});
 
 
-		                         });
-				 		//-------------------End of Inserting into the daily incomes table
+				 						}
 
-				 	}
+				 					}
+
+
+				 				});
+
+				 				//------------------End of Getting users with the same acess code
+
+
+
+
+
+				 			});
+
+
+
+				 		}
+
+				 		//------------------------------END OF INSERTING INTO THE DAILY_INCOMES_USER_SYNC_TABLE PROMISE---------
+
+
+
+
+
+				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
+				 		insertIntoDailyIncomes().then(function(result){
+				 			return getMaximumInsertedRecord();
+				 		}).then(function(result){
+				 			return InsertIntoDailyIncomesUserSyncTable(result);
+				 		}).then(function(result){
+				 			console.log(result);
+				 		});
+
+				 		//----------------------------END OF TRAIN FUNCTIONLAITY
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				 	}//----end of if
 
 				 	//--------------If data has been uploaded
 				 	else
@@ -139,9 +180,8 @@
 				 });
 
 
-			});
 
-
+	 });
 		return   res.end(JSON.stringify({ resp:"pass",msg:'Daily Income Upload Successfull'}));
 
 		}
