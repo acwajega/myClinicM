@@ -111,7 +111,7 @@
 					 		let upDateDailyIncome = function(){
 
 					 			return new Promise(function(resolve,reject){
-					 						 qry_action.query('update daily_incomes set DI_TOTAL_AMOUNT = ?,DI_AMOUNT_PAID =?,DI_AMOUNT_NOT_PAID =?,DI_EXPENSE =? where di_date =? and di_mci_code =?',[row.DI_TOTAL_AMOUNT,row.DI_AMOUNT_PAID,row.DI_AMOUNT_NOT_PAID,row.DI_EXPENSE,row.DI_DATE,row.DI_MCI_CODE] , function(err, result) {
+					 						 qry_action.query('update daily_incomes set DI_TOTAL_AMOUNT = ?,DI_AMOUNT_PAID =?,DI_AMOUNT_NOT_PAID =?,DI_EXPENSE =? where di_date =? and di_mci_code =?',[row.DI_TOTAL_AMOUNT,row.DI_AMOUNT_PAID,row.DI_AMOUNT_NOT_PAID,row.DI_EXPENSE,row.DI_DATE,row.DI_MCI_CODE] , function(err, results) {
 			               if (err) {
 			               	reject('error executing the query');
 
