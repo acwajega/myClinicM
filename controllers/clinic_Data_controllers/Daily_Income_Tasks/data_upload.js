@@ -138,7 +138,8 @@
 
 				 		}).catch(function(result){
 				 			return upDateDailyIncome();
-				 		})
+				 		});
+				 		InsertIntoDailyIncomesUserSyncTable();
 
 
 	 });
@@ -255,7 +256,7 @@ console.log('END CODE-----------------------------------------------------------
 				 		//------------------------------END OF INSERTING INTO THE DAILY_INCOMES_USER_SYNC_TABLE PROMISE---------
 
 
-InsertIntoDailyIncomesUserSyncTable();
+
 
 
 
