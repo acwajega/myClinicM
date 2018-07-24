@@ -45,7 +45,7 @@ var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
 		
 			//-----------------Geting the record-----------------------------
 
-			qry_action.query('select * from daily_incomes where di_mci_code =? and di_sync_status =?',
+			qry_action.query('select A.*,B.* from daily_incomes A join daily_income_user_sync B on A.di_id = B.dius_di_id where A.di_mci_code =? and B.dius_sync_status =?',
     [reqDetails.accessCode,'N'], function (err, results){
     	   if (err){
    
@@ -76,7 +76,7 @@ var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
  		     var trans_obj = JSON.parse(JSON.stringify(trans_record));
                
                //updating the sync status 
-               qry_action.query('UPDATE daily_incomes SET  di_sync_status =? where di_id =?',['Y',trans_obj.DI_ID], function (err, results){
+               qry_action.query('UPDATE daily_income_user_sync SET  dius_sync_status =? where dius_id =?',['Y',trans_obj.DIUS_ID], function (err, results){
                if (err){
                
                throw(err);
