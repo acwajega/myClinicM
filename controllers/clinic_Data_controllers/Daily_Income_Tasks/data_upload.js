@@ -23,12 +23,18 @@
 			var jsonObject=JSON.parse(JSON.stringify(UploadDetails));
 
 			//--------------------Going through all the rows of json objects
-			_.each(jsonObject, async function(data_obj) {
+			_.each(jsonObject, function(data_obj) {
 
 				//----------------Getting a row object
 				 var row =JSON.parse(JSON.stringify(data_obj));
-				 //------------Checking if data has already been uploaded------------
-				 await qry_action.query('SELECT * FROM daily_incomes WHERE di_date = ? and di_mci_code =?',[row.DI_DATE,row.DI_MCI_CODE] , async function(err, results) {
+
+
+
+				 //--------------Check if record has been entred Promise--------
+				 let checkIfRecordHasBeenEntred = function(){
+				 	return new Promise(function(resolve,reject){
+				 		//------------Checking if data has already been uploaded------------
+				 qry_action.query('SELECT * FROM daily_incomes WHERE di_date = ? and di_mci_code =?',[row.DI_DATE,row.DI_MCI_CODE] , function(err, results) {
 				 	
 				 	//-------------If there is an error with the query
 				 	if (err) throw err;
@@ -37,8 +43,37 @@
 				 	//---------------If no data has been entred-----------
 				 	if (results.length === 0){
 
+				 		resolve('is_new');
 
-				 		//--------------------Insert into Daily INcomes promise
+				 	}//----end of if
+
+				 	//--------------If data has been uploaded
+				 	else
+				 	{
+				 		reject('is_old');
+
+				 	}
+
+
+				 });
+
+
+				 //------------------------------END OF CHECK----------------------------------------------------------------
+
+
+				 	});
+
+
+				 }
+
+				  //--------------End of Check if record has been entred Promise--------
+
+
+				 
+
+
+
+				 //--------------------Insert into Daily INcomes promise
 				 		let insertIntoDailyIncomes = function(){
 				 			return new Promise(function(resolve,reject){
 				 				qry_action.query('insert into daily_incomes set ?',row,function(err,results){
@@ -62,19 +97,45 @@
 				 		//------------------------End on Inserting ino Daily Incomes Proise
 
 
+
+				 		//---------------------UPDATING DAILY INCOMES PROMISE----------------
+					 		let upDateDailyIncome = function(){
+
+					 			return new Promise(function(resolve,reject){
+					 						 qry_action.query('update daily_incomes set DI_TOTAL_AMOUNT = ?,DI_AMOUNT_PAID =?,DI_AMOUNT_NOT_PAID =?,DI_EXPENSE =? where di_date =? and di_mci_code =?',[row.DI_TOTAL_AMOUNT,row.DI_AMOUNT_PAID,row.DI_AMOUNT_NOT_PAID,row.DI_EXPENSE,row.DI_DATE,row.DI_MCI_CODE] , function(err, result) {
+			               if (err) {
+			               	reject('error executing the query');
+
+
+			               } 
+								else
+					 					{
+					 						resolve(results.insertId);
+
+					 					}
+			                 });
+
+					 			});
+
+					 		}
+
+				 		//---------------------END OF UPDATING DAILY INCOMES PROMISE
+
+
+
 				 		//-------------------------Getting the maximum inserted record Promise------------
-				 		let getMaximumInsertedRecord = async function(){
+				 		let getMaximumInsertedRecord = function(){
 
 				 			return new Promise(function(resolve,reject){
-				 					qry_action.query('select max(di_id) as "ID" from daily_incomes ',async function(err,results){
+				 					qry_action.query('select max(di_id) as "ID" from daily_incomes ',function(err,results){
 
 				 					if (err){
-				 						await reject('error executing the query');
+				 						reject('error executing the query');
 
 				 					}
 				 					else
 				 					{
-				 						await resolve(results[0].ID);
+				 						resolve(results[0].ID);
 
 				 					}
 
@@ -140,13 +201,18 @@
 
 
 				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
-				 		await insertIntoDailyIncomes().then(async function(result){
-				 			return await getMaximumInsertedRecord();
-				 		}).then(async function(result){
-				 			return await InsertIntoDailyIncomesUserSyncTable(result);
-				 		}).then(async function(result){
-				 			console.log(await result);
-				 		});
+
+
+				 		checkIfRecordHasBeenEntred().then(function(result){
+				 			return insertIntoDailyIncomes();
+
+				 		}).then(function(result){
+				 			return getMaximumInsertedRecord();
+				 		}).then(function(result){
+				 			return InsertIntoDailyIncomesUserSyncTable(result);
+				 		}).catch(function(result){
+				 			return upDateDailyIncome();
+				 		})
 
 				 		//----------------------------END OF TRAIN FUNCTIONLAITY
 
@@ -163,21 +229,16 @@
 
 
 
-				 	}//----end of if
-
-				 	//--------------If data has been uploaded
-				 	else
-				 	{
-				 		 qry_action.query('update daily_incomes set DI_TOTAL_AMOUNT = ?,DI_AMOUNT_PAID =?,DI_AMOUNT_NOT_PAID =?,DI_EXPENSE =? where di_date =? and di_mci_code =?',[row.DI_TOTAL_AMOUNT,row.DI_AMOUNT_PAID,row.DI_AMOUNT_NOT_PAID,row.DI_EXPENSE,row.DI_DATE,row.DI_MCI_CODE] , function(err, result) {
-		               if (err) throw err ;
-
-		              console.log(result.insertId);
-		                 });
-
-				 	}
 
 
-				 });
+
+
+
+
+
+
+
+
 
 
 
