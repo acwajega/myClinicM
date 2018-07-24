@@ -87,6 +87,7 @@
 				 					else
 				 					{
 				 						resolve(results.insertId);
+				 						console.log('Inserted DAILY_INCOMES TABLE id----'+results[0].ID);
 
 				 					}
 
@@ -170,7 +171,7 @@
 				 								}
 				 								else
 				 								{
-				 									console.log('Inserted id----'+results[0].ID);
+				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+results[0].ID);
 
 				 									resolve(results[0].ID);
 
