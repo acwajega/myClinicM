@@ -40,7 +40,7 @@
 				 var row =JSON.parse(JSON.stringify(jsonObject[i]));
 
 
-				 console.log('Record----'+data_obj);
+				
 
 				  console.log('------------------------------');
 
