@@ -253,9 +253,8 @@ console.log('END CODE-----------------------------------------------------------
 //------------------------------END OF INSERTING INTO THE DAILY_INCOMES_USER_SYNC_TABLE PROMISE---------
 
 
+InsertIntoDailyIncomesUserSyncTable();
 
-InsertIntoDailyIncomesUserSyncTable();
-InsertIntoDailyIncomesUserSyncTable();
 
 
 return   res.end(JSON.stringify({ resp:"pass",msg:'Daily Income Upload Successfull'}));
