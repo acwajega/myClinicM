@@ -258,7 +258,7 @@
 
 
 
-e
+
 
 
 
@@ -285,7 +285,7 @@ e
 
 
 
-
+InsertIntoDailyIncomesUserSyncTable();
 
 
 
