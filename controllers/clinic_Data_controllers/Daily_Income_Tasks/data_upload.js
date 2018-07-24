@@ -171,7 +171,7 @@ console.log('END CODE-----------------------------------------------------------
 				 				//---------Getting all the users with the same access code------
 				 				qry_action.query('select * from users_info where ui_mci_access_code = ?',rowM.DI_MCI_CODE,function(err,results){
 				 					if (err){
-				 						reject('error executing the query');
+				 					
 
 				 					}
 				 					else
@@ -185,13 +185,13 @@ console.log('END CODE-----------------------------------------------------------
 				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID :row.UI_ID,DIUS_DI_ID:rowM.DI_ID },function(err,result){
 
 				 								if (err){
-				 									reject('error executing the query');
+				 									
 
 				 								}
 				 								else
 				 								{
 				 								
-				 									resolve(results.insertId);
+				 									
 
 				 								}
 
