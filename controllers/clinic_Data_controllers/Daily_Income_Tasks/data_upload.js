@@ -162,7 +162,9 @@ console.log('END CODE-----------------------------------------------------------
 
 				 						var RecordId =0;
 				 						for (var i = 0; i < results.length; i++){
-				 							 (function(i) {
+
+				 							var dailyIncomeRow = results[i];
+				 							 (function(rowM) {
 				 							let RCount = i;
 
 				 							console.log('*****Record Count----'+RCount);
@@ -173,7 +175,7 @@ console.log('END CODE-----------------------------------------------------------
 
 
 				 				//---------Getting all the users with the same access code------
-				 				qry_action.query('select * from users_info where ui_mci_access_code = ?',results[i].DI_MCI_CODE,function(err,results){
+				 				qry_action.query('select * from users_info where ui_mci_access_code = ?',rowM.DI_MCI_CODE,function(err,results){
 				 					if (err){
 				 						reject('error executing the query');
 
@@ -182,10 +184,11 @@ console.log('END CODE-----------------------------------------------------------
 				 					{
 				 						var Xo = RecordId;
 				 						for (var i = 0; i < results.length; i++){
-				 							 (function(i) {
+				 							var userRow = results[i];
+				 							 (function(row) {
 
 				 							
-				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID : results[i].UI_ID,DIUS_DI_ID:Xo },function(err,result){
+				 							qry_action.query('insert into daily_income_user_sync set ?',{DIUS_UI_ID : row.UI_ID,DIUS_DI_ID:rowM.DI_ID },function(err,result){
 
 				 								if (err){
 				 									reject('error executing the query');
@@ -200,7 +203,7 @@ console.log('END CODE-----------------------------------------------------------
 				 								}
 
 				 							});
-				 							})(i);
+				 							})(userRow);
 
 
 				 						}//-----End of For Loop
@@ -214,7 +217,7 @@ console.log('END CODE-----------------------------------------------------------
 				 							
 
 
-				 						})(i);
+				 						})(dailyIncomeRow);
 				 						}//---------------End of For loop
 
 				 					}
