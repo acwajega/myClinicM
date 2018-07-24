@@ -24,7 +24,10 @@
 			var count = 0;
 
 			//--------------------Going through all the rows of json objects
-			_.each(jsonObject, function(data_obj) {
+			_.each(jsonObject, async function(data_obj) {
+
+
+
 				console.log('Record----'+count+1);
 
 				//----------------Getting a row object
@@ -205,21 +208,21 @@
 
 
 
-				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
-
-
-				 		checkIfRecordHasBeenEntred().then(function(result){
-				 			return insertIntoDailyIncomes();
-
-				 		}).then(function(result){
-				 			return getMaximumInsertedRecord();
-				 		}).then(function(result){
-				 			return InsertIntoDailyIncomesUserSyncTable(result);
-				 		}).catch(function(result){
+				 		function executeAsyncTask(){
+				 			let recordID;
+				 			return checkIfRecordHasBeenEntred().then(function(result){
+				 				return insertIntoDailyIncomes().then(function(result){
+				 					return getMaximumInsertedRecord().then(function(result){
+				 						return InsertIntoDailyIncomesUserSyncTable(result);
+				 					}) 
+				 				})
+				 			}).catch(function(result){
 				 			return upDateDailyIncome();
 				 		})
 
-				 		//----------------------------END OF TRAIN FUNCTIONLAITY
+				 		}
+executeAsyncTask();
+
 
 
 
@@ -248,6 +251,11 @@
 
 
 	 });
+
+
+
+
+
 		return   res.end(JSON.stringify({ resp:"pass",msg:'Daily Income Upload Successfull'}));
 
 		}
