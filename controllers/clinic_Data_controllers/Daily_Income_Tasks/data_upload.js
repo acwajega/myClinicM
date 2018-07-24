@@ -244,7 +244,7 @@
 
 
 
-
+console.log('END CODE------------------------------------------------------------');
 
 InsertIntoDailyIncomesUserSyncTable();
 
