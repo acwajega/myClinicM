@@ -171,9 +171,9 @@
 				 								}
 				 								else
 				 								{
-				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+results[0].ID);
+				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+results.insertId);
 
-				 									resolve(results[0].ID);
+				 									resolve(results.insertId);
 
 				 								}
 
