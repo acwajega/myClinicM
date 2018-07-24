@@ -65,7 +65,7 @@
 				 		//-------------------------Getting the maximum inserted record Promise------------
 				 		let getMaximumInsertedRecord = function(){
 
-				 			return new Promise(function(resoolve,reject){
+				 			return new Promise(function(resolve,reject){
 				 					qry_action.query('select max(di_id) as "ID" from daily_incomes ',function(err,results){
 
 				 					if (err){
