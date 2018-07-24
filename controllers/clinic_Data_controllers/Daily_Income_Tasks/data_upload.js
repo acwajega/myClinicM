@@ -27,8 +27,8 @@
 			_.each(jsonObject, async function(data_obj) {
 
 
-
-				console.log('Record----'+count+1);
+				let f =count+1;
+				console.log('Record----'+f);
 
 				//----------------Getting a row object
 				 var row =JSON.parse(JSON.stringify(data_obj));
@@ -90,7 +90,7 @@
 				 					else
 				 					{
 				 						resolve(results.insertId);
-				 						console.log('Inserted DAILY_INCOMES TABLE id----'+results.insertId);
+				 						console.log('Inserted DAILY_INCOMES TABLE id----'+f);
 
 				 					}
 
@@ -174,7 +174,7 @@
 				 								}
 				 								else
 				 								{
-				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+results.insertId);
+				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+f);
 
 				 									resolve(results.insertId);
 
@@ -208,22 +208,20 @@
 
 
 
-				 		function executeAsyncTask(){
-				 			let recordID;
-				 			return checkIfRecordHasBeenEntred().then(function(result){
-				 				return insertIntoDailyIncomes().then(function(result){
-				 					return getMaximumInsertedRecord().then(function(result){
-				 						return InsertIntoDailyIncomesUserSyncTable(result);
-				 					}) 
-				 				})
-				 			}).catch(function(result){
+				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
+
+				 	   checkIfRecordHasBeenEntred().then(function(result){
+				 	   	
+				 			return insertIntoDailyIncomes();
+
+				 		}).then(function(result){
+				 		
+				 			return getMaximumInsertedRecord();
+				 		}).then(function(result){
+				 			return InsertIntoDailyIncomesUserSyncTable(result);
+				 		}).catch(function(result){
 				 			return upDateDailyIncome();
 				 		})
-
-				 		}
-executeAsyncTask();
-
-
 
 
 
