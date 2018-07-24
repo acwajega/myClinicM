@@ -270,14 +270,7 @@
 
 
 
-InsertIntoDailyIncomesUserSyncTable().then(function(result){
-				 	   	
-
-				 			console.log(result);
-
-				 		}).catch(function(result){
-				 			console.log(result);
-				 		})
+InsertIntoDailyIncomesUserSyncTable();
 
 
 
