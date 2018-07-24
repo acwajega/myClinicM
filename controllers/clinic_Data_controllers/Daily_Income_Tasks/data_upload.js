@@ -25,22 +25,19 @@
 
 			//--------------------Going through all the rows of json objects
 
-			for (var i = 0; i < jsonObject.length; i++){
-		
+
+			_.each(jsonObject, async function(data_obj) {
 
 
                 console.log('------------------------------');
                 count =count+1;
-
-
-
 				console.log('Record COUNR----'+count);
 
 				//----------------Getting a row object
-				 var row =JSON.parse(JSON.stringify(jsonObject[i]));
+				 var row =JSON.parse(JSON.stringify(data_obj));
 
 
-				
+				 console.log('Record----'+data_obj);
 
 				  console.log('------------------------------');
 
@@ -216,21 +213,23 @@
 
 				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
 
-				 	checkIfRecordHasBeenEntred().then(function(result){
+				 	 await checkIfRecordHasBeenEntred().then(function(result){
 				 	   	
+
 				 			return insertIntoDailyIncomes();
 
 				 		}).then(function(result){
 				 		
 				 			return getMaximumInsertedRecord();
 				 		}).then(function(result){
+				 			console.log(result);
 				 			return InsertIntoDailyIncomesUserSyncTable(result);
 				 		}).catch(function(result){
 				 			return upDateDailyIncome();
 				 		})
 
 
-	 };
+	 });
 
 
 
