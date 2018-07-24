@@ -27,8 +27,8 @@
 			_.each(jsonObject, async function(data_obj) {
 
 
-				let f =count+1;
-				console.log('Record----'+f);
+				let count =count+1;
+				console.log('Record----'+count);
 
 				//----------------Getting a row object
 				 var row =JSON.parse(JSON.stringify(data_obj));
@@ -90,7 +90,7 @@
 				 					else
 				 					{
 				 						resolve(results.insertId);
-				 						console.log('Inserted DAILY_INCOMES TABLE id----'+f);
+				 						console.log('Inserted DAILY_INCOMES TABLE id----'+count);
 
 				 					}
 
@@ -174,7 +174,7 @@
 				 								}
 				 								else
 				 								{
-				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+f);
+				 									console.log('Inserted DAILY_INCOMES_USER_SYNC_TABLE id----'+count);
 
 				 									resolve(results.insertId);
 
