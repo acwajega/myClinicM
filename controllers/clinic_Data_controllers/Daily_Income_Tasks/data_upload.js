@@ -24,13 +24,26 @@
 			var count = 0;
 
 			//--------------------Going through all the rows of json objects
-			_.each(jsonObject, async function(data_obj) {
 
+			for (var i = 0; i < jsonObject.length; i++){
+		
+
+
+                console.log('------------------------------');
                 count =count+1;
-				console.log('Record----'+count);
+
+
+
+				console.log('Record COUNR----'+count);
 
 				//----------------Getting a row object
-				 var row =JSON.parse(JSON.stringify(data_obj));
+				 var row =JSON.parse(JSON.stringify(jsonObject[i]));
+
+
+				 console.log('Record----'+data_obj);
+
+				  console.log('------------------------------');
+
 
 
 
@@ -72,11 +85,6 @@
 
 				  //--------------End of Check if record has been entred Promise--------
 
-
-				 
-
-
-
 				 //--------------------Insert into Daily INcomes promise
 				 		let insertIntoDailyIncomes = function(){
 				 			return new Promise(function(resolve,reject){
@@ -92,7 +100,6 @@
 				 						console.log('Inserted DAILY_INCOMES TABLE id----'+count);
 
 				 					}
-
 
 				 				});
 
@@ -209,7 +216,7 @@
 
 				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
 
-				 	 await checkIfRecordHasBeenEntred().then(function(result){
+				 	checkIfRecordHasBeenEntred().then(function(result){
 				 	   	
 				 			return insertIntoDailyIncomes();
 
@@ -223,31 +230,7 @@
 				 		})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	 });
+	 };
 
 
 
