@@ -35,11 +35,11 @@
 
 				 	//------------if there is no error
 				 	//---------------If no data has been entred-----------
-				 	if (results.length ===0){
+				 	if (results.length === 0){
 
 
 				 		//-------------------Inserting into the daily incomes table
-				 		 qry_action.query('insert into daily_incomes set ?',row, function(err, results) {
+				 		 qry_action.query('insert into daily_incomes set ?',row, async function(err, results) {
 		                      if (err) {
 		                      	throw err;
 
@@ -49,8 +49,73 @@
 
 
 		                      	//----Has INserted
-		                      	console.log(results.insertId);
-		                     
+		                      	await console.log(results.insertId);
+
+		                      	//--------------------------Getting the maximum id from the insert statement----------
+		                      	qry_action.query('select max(di_id) as RECORD_ID from daily_incomes', async function (err,results){
+		                      		  if (err) {
+		                      	throw err;
+
+		                      }
+		                      else
+		                      {
+		                      	const RECORD_ID = await results[0].RECORD_ID;
+		                      	await console.log('--'+RECORD_ID+'----');
+
+		                      	//----------------------Getting users with the same access code and inserting the record to their mail box-------
+		                      	qry_action.query('select * from users_info where ui_mci_access_code = ? ',[row.DI_MCI_CODE], async function(err,results){
+
+		                      		if (err){
+		                      			throw err;
+
+		                      		}
+		                      		else
+
+		                      		{
+		                      			//-------------------FOR LOOP--------------------------
+		                      			 for (var i = 0; i < results.length; i++){
+		                      				//-------------Getting the request datae and time
+											var d = new Date(); 
+											var mdate = d.getFullYear() +'-'+(d.getMonth()+1)+'-'+d.getDate() ;
+
+											var time = new Date();
+											var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
+											//-------------End of Getting the request date and time
+		                      				//------------------inserting the record ingo the daily_income_user_sync-------
+		                      				qry_action.query('insert into daily_income_user_sync set ',{DIUS_UI_ID:results[i].UI_ID,DIUS_DI_ID:RECORD_ID,DIUS_DATE:mdate,DIUS_TIME:m_time},async function(err,results){
+
+		                      					if (err){
+
+		                      					}
+		                      					else
+		                      					{
+		                      						await console.log(results.insertId);
+		                      					}
+		                      				});
+
+		                      				//-------------------end of inserting the record ingo the daily_income_user_sync-----
+
+
+		                      			}
+		                      			//-------------------END OF FOR LOOP--------------------------
+
+
+		                      		}
+
+
+		                      	});
+
+		                      	//--------------------END OF Getting users with the same access code and inserting the record to their mail box-------
+		                      }
+
+
+
+		                      	});
+
+
+
+		                      	//-------------------------End of Getting the maximum id from the insert statement-----
+
 		                      }             
 
 
@@ -62,7 +127,7 @@
 				 	//--------------If data has been uploaded
 				 	else
 				 	{
-				 		 qry_action.query('update daily_incomes set DI_TOTAL_AMOUNT = ?,DI_AMOUNT_PAID =?,DI_AMOUNT_NOT_PAID =?,DI_EXPENSE =? where di_date =?',[row.DI_TOTAL_AMOUNT,row.DI_AMOUNT_PAID,row.DI_AMOUNT_NOT_PAID,row.EXPENSE,row.DI_DATE] , function(err, result) {
+				 		 qry_action.query('update daily_incomes set DI_TOTAL_AMOUNT = ?,DI_AMOUNT_PAID =?,DI_AMOUNT_NOT_PAID =?,DI_EXPENSE =? where di_date =? and di_mci_code =?',[row.DI_TOTAL_AMOUNT,row.DI_AMOUNT_PAID,row.DI_AMOUNT_NOT_PAID,row.DI_EXPENSE,row.DI_DATE,row.DI_MCI_CODE] , function(err, result) {
 		               if (err) throw err ;
 
 		              console.log(result.insertId);
