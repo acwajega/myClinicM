@@ -37,14 +37,7 @@
 				 var row =JSON.parse(JSON.stringify(data_obj));
 
 
-				 console.log('Record----'+data_obj);
-
-				  console.log('------------------------------');
-
-
-
-
-				 //--------------Check if record has been entred Promise--------
+				 //-----------------------------------Check if record has been entred Promise--------
 				 let checkIfRecordHasBeenEntred = function(){
 				 	return new Promise(function(resolve,reject){
 				 		//------------Checking if data has already been uploaded------------
@@ -72,7 +65,7 @@
 				 });
 
 
-				 //------------------------------END OF CHECK----------------------------------------------------------------
+				 //--------------------------------------END OF CHECK----------------------------------------------------------------
 
 
 				 	});
@@ -131,8 +124,7 @@
 				 		//---------------------END OF UPDATING DAILY INCOMES PROMISE
 				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
 
-				 	 await checkIfRecordHasBeenEntred().then(function(result){
-				 	   	
+				 	 await checkIfRecordHasBeenEntred().then(function(result){			 	   	
 
 				 			return insertIntoDailyIncomes();
 
@@ -143,17 +135,13 @@
 
 
 	 });
+InsertIntoDailyIncomesUserSyncTable();
 
 
-
-console.log('END CODE------------------------------------------------------------');
 //------------------------------INSERTING INTO THE DAILY_INCOMES_USER_SYNC_TABLE PROMISE---------
 
 				 		let InsertIntoDailyIncomesUserSyncTable = function(){
 				 		
-				 				console.log('REACHED HIAE------------------------------------------------------------');
-
-
 				 				qry_action.query('select * from daily_incomes where di_sync_status = ?  ',['N'],function(err,results){
 
 				 					if (err){
@@ -216,17 +204,9 @@ console.log('END CODE-----------------------------------------------------------
 
 				 							});
 
-
-
-
-
 				 							//-------------------End of Updating sync sttaus
 
-
 				 							})(userRow);
-
-
-
 
 
 				 						}//-----End of For Loop
@@ -253,7 +233,7 @@ console.log('END CODE-----------------------------------------------------------
 //------------------------------END OF INSERTING INTO THE DAILY_INCOMES_USER_SYNC_TABLE PROMISE---------
 
 
-InsertIntoDailyIncomesUserSyncTable();
+
 
 
 
