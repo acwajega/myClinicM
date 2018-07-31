@@ -70,13 +70,18 @@ var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
    	 //------Updating the sync status
    for (var i = 0; i < results.length; i++){
 
+    var dataRow = results[i];
+
+     (function(rowM) {
 
    
-          var trans_record = results[i];  
- 		     var trans_obj = JSON.parse(JSON.stringify(trans_record));
+           
+   
+         // var trans_record = results[i];  
+ 		    // var trans_obj = JSON.parse(JSON.stringify(trans_record));
                
                //updating the sync status 
-               qry_action.query('UPDATE daily_income_user_sync SET  dius_sync_status =? where dius_id =?',['Y',trans_obj.DIUS_ID], function (err, results){
+               qry_action.query('UPDATE daily_income_user_sync SET  dius_sync_status =? where dius_id =?',['Y',rowM.DIUS_ID], function (err, results){
                if (err){
                
                throw(err);
@@ -92,6 +97,7 @@ var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
                
                
                });
+               })(dataRow);
                
                
                
