@@ -37,9 +37,65 @@
 				 var row =JSON.parse(JSON.stringify(data_obj));
 
 
+				 		//---------------------UPDATING DAILY INCOMES PROMISE----------------
+					 		let upDateDailyIncome = function(){
+
+					 	
+					 						 qry_action.query('update daily_incomes set DI_TOTAL_AMOUNT = ?,DI_AMOUNT_PAID =?,DI_AMOUNT_NOT_PAID =?,DI_EXPENSE =?,DI_SYNC_STATUS = ? where di_date =? and di_mci_code =?',[row.DI_TOTAL_AMOUNT,row.DI_AMOUNT_PAID,row.DI_AMOUNT_NOT_PAID,row.DI_EXPENSE,'N',row.DI_DATE,row.DI_MCI_CODE] , function(err, results) {
+			               if (err) {
+			               	reject('error executing the query');
+
+
+			               } 
+								else
+					 					{
+					 						
+
+					 					}
+			                 });
+
+					 		
+
+					 		}
+
+				 		//---------------------END OF UPDATING DAILY INCOMES PROMISE
+
+
+
+
+
+
+
+				  //--------------------Insert into Daily INcomes promise
+				 		let insertIntoDailyIncomes = function(){
+			
+				 				qry_action.query('insert into daily_incomes set ?',row,function(err,results){
+
+				 					if (err){
+				 					
+
+				 					}
+				 					else
+				 					{
+				 					
+				 						console.log('Inserted DAILY_INCOMES TABLE id----'+count);
+
+				 					}
+
+				 				});
+
+
+				 		}
+				 		//------------------------End on Inserting ino Daily Incomes Proise
+
+
+
+
+
+
 				 //-----------------------------------Check if record has been entred Promise--------
 				 let checkIfRecordHasBeenEntred = function(){
-				 	return new Promise(function(resolve,reject){
+
 				 		//------------Checking if data has already been uploaded------------
 				 qry_action.query('SELECT * FROM daily_incomes WHERE di_date = ? and di_mci_code =?',[row.DI_DATE,row.DI_MCI_CODE] , function(err, results) {
 				 	
@@ -49,16 +105,16 @@
 				 	//------------if there is no error
 				 	//---------------If no data has been entred-----------
 				 	if (results.length === 0){
-
-				 		resolve('is_new');
+				 		insertIntoDailyIncomes();//---insert into the table
+				 		
 
 				 	}//----end of if
 
 				 	//--------------If data has been uploaded
 				 	else
 				 	{
-				 		reject('is_old');
-
+				 		upDateDailyIncome();//---------UPDATE
+				 		
 				 	}
 
 
@@ -68,69 +124,18 @@
 				 //--------------------------------------END OF CHECK----------------------------------------------------------------
 
 
-				 	});
-
 
 				 }
 
 				  //--------------End of Check if record has been entred Promise--------
 
-				 //--------------------Insert into Daily INcomes promise
-				 		let insertIntoDailyIncomes = function(){
-				 			return new Promise(function(resolve,reject){
-				 				qry_action.query('insert into daily_incomes set ?',row,function(err,results){
-
-				 					if (err){
-				 						reject('error executing the query');
-
-				 					}
-				 					else
-				 					{
-				 						resolve(results.insertId);
-				 						console.log('Inserted DAILY_INCOMES TABLE id----'+count);
-
-				 					}
-
-				 				});
-
-				 			});
-
-				 		}
-				 		//------------------------End on Inserting ino Daily Incomes Proise
+				
 
 
 
-				 		//---------------------UPDATING DAILY INCOMES PROMISE----------------
-					 		let upDateDailyIncome = function(){
-
-					 			return new Promise(function(resolve,reject){
-					 						 qry_action.query('update daily_incomes set DI_TOTAL_AMOUNT = ?,DI_AMOUNT_PAID =?,DI_AMOUNT_NOT_PAID =?,DI_EXPENSE =?,DI_SYNC_STATUS = ? where di_date =? and di_mci_code =?',[row.DI_TOTAL_AMOUNT,row.DI_AMOUNT_PAID,row.DI_AMOUNT_NOT_PAID,row.DI_EXPENSE,'N',row.DI_DATE,row.DI_MCI_CODE] , function(err, results) {
-			               if (err) {
-			               	reject('error executing the query');
-
-
-			               } 
-								else
-					 					{
-					 						resolve(results.insertId);
-
-					 					}
-			                 });
-
-					 			});
-
-					 		}
-
-				 		//---------------------END OF UPDATING DAILY INCOMES PROMISE
 				 		//---------------------GOING TO PERFORM THE TRAIN FUNCTIONALITY
 
-				 	 await checkIfRecordHasBeenEntred().then(function(result){			 	   	
-
-				 			return insertIntoDailyIncomes();
-
-				 		}).catch(function(result){
-				 			return upDateDailyIncome();
-				 		});
+				 checkIfRecordHasBeenEntred();
 				 		
 
 
