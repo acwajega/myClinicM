@@ -62,7 +62,7 @@ db_controller.CONNECT_TO_DATABASE();
 
     //-----------------------DATA UPLOAD URLS-------------------------------------
     app.post('/api/clinicData/Upload/DailyIncome',route_index);//--------Upload DailyIncome
-    app.post('/api/clinicData/Upload/IncomeSummary',route_index);//--------Upload IncomeSummary
+  //  app.post('/api/clinicData/Upload/IncomeSummary',route_index);//--------Upload IncomeSummary
    // app.post('/api/clinicData/Upload/PharmacySales',route_index);//--------Upload PharmacySales
     //app.post('/api/clinicData/Upload/LabSales',route_index);//--------Upload LabSales
 
@@ -70,7 +70,7 @@ db_controller.CONNECT_TO_DATABASE();
 
     //---------------------DATA SYNC URLS----------------------------------------------
     app.post('/api/clinicData/Sync/DailyIncome',route_index);//--------Sync DailyIncome
-    app.post('/api/clinicData/Sync/IncomeSummary',route_index);//--------Sync IncomeSummary
+   // app.post('/api/clinicData/Sync/IncomeSummary',route_index);//--------Sync IncomeSummary
   //  app.post('/api/clinicData/Sync/PharmacySales',route_index);//--------Sync PharmacySales
   // app.post('/api/clinicData/Sync/LabSales',route_index);//--------Sync LabSales
 
