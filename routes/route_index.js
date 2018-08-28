@@ -32,7 +32,7 @@ var clinic_controller_LabSalesTasks_dataSync =require('../controllers/clinic_Dat
 
 
 //------------END OF CLINIC DATA CONTROLLERS--------------------------
-//=======================================================================
+//================================================================	=======
 
 
 
@@ -65,38 +65,6 @@ router.post('/api/clinicData/Sync/DailyIncome',clinic_controller_DailyIncomeTask
 //-------------- routing to Clinic api for Daily Income Upload ------------------
 router.post('/api/clinicData/Upload/IncomeSummary',clinic_controller_IncomeSummaryTasks_dataUpload.Upload);
 //---------------- End of Daily Income Upload ---------------------------------
-//-------------- routing to Clinic api for Daily Income Sync ------------------
-router.post('/api/clinicData/Sync/IncomeSummary',clinic_controller_IncomeSummaryTasks_dataSync.Sync);
-//---------------- End of Daily Income Upload ---------------------------------
-//===================================================================================================
-
-
-
-
-
-//===================================================================================================
-//-------------- routing to Clinic api for Daily Income Upload ------------------
-router.post('/api/clinicData/Upload/PharmacySales',clinic_controller_PharmacySalesTasks_dataUpload.Upload);
-//---------------- End of Daily Income Upload ---------------------------------
-//-------------- routing to Clinic api for Daily Income Sync ------------------
-router.post('/api/clinicData/Sync/PharmacySales',clinic_controller_PharmacySalesTasks_dataSync.Sync);
-//---------------- End of Daily Income Upload ---------------------------------
-//===================================================================================================
-
-
-
-
-
-
-
-//===================================================================================================
-//-------------- routing to Clinic api for Daily Income Upload ------------------
-router.post('/api/clinicData/Upload/LabSales',clinic_controller_LabSalesTasks_dataUpload.Upload);
-//---------------- End of Daily Income Upload ---------------------------------
-//-------------- routing to Clinic api for Daily Income Sync ------------------
-router.post('/api/clinicData/Sync/LabSales',clinic_controller_LabSalesTasks_dataSync.Sync);
-//---------------- End of Daily Income Upload ---------------------------------
-//===================================================================================================
 
 
 
