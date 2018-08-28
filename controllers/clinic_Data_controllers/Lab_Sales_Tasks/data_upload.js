@@ -40,10 +40,10 @@
 				 		//---------------------UPDATING DAILY INCOMES PROMISE----------------
 					 		let upDateDailyIncome = function(){
 					 	
-					 						 qry_action.query('update lab_sales set LS_TOTAL_SALES = ?,LS_TOTAL_TESTS = ? '+					 						 	
+					 						 qry_action.query('update lab_sales set LS_TOTAL_SALES = ?,LS_TOTAL_TESTS = ?,LS_SYNC_STATUS =? '+					 						 	
 					 						 	 ' where ls_date = ? and ls_mci_code = ?',
-					 						 	[row.TOTAL_SALES,row.LS_TOTAL_TESTS,					 						 	
-					 						 	'N',row.LS_DATE,row.LS_MCI_CODE] , function(err, results) {
+					 						 	[row.LS_TOTAL_SALES,row.LS_TOTAL_TESTS,'N',row.LS_DATE,row.LS_MCI_CODE] , function(err, results) {					 						 	
+					 						 	
 			               if (err) {
 			               	reject('error executing the query');
 
