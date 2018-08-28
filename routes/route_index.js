@@ -17,16 +17,16 @@ var clinic_controller_DailyIncomeTasks_dataSync =require('../controllers/clinic_
 
 
 var clinic_controller_IncomeSummaryTasks_dataUpload =require('../controllers/clinic_Data_controllers/Income_Summary_Tasks/data_upload.js');
-var clinic_controller_IncomeSummaryTasks_dataSync =require('../controllers/clinic_Data_controllers/Income_Summary_Tasks/data_syncs');
+var clinic_controller_IncomeSummaryTasks_dataSync =require('../controllers/clinic_Data_controllers/Income_Summary_Tasks/data_sync.js');
 
 
 var clinic_controller_PharmacySalesTasks_dataUpload =require('../controllers/clinic_Data_controllers/Pharmacy_Sales_Tasks/data_upload.js');
-var clinic_controller_PharmacySalesTasks_dataSync =require('../controllers/clinic_Data_controllers/Pharmacy_Sales_Tasks/data_syncs');
+var clinic_controller_PharmacySalesTasks_dataSync =require('../controllers/clinic_Data_controllers/Pharmacy_Sales_Tasks/data_sync.js');
 
 
 
 var clinic_controller_LabSalesTasks_dataUpload =require('../controllers/clinic_Data_controllers/Lab_Sales_Tasks/data_upload.js');
-var clinic_controller_LabSalesTasks_dataSync =require('../controllers/clinic_Data_controllers/Lab_Sales_Tasks/data_syncs');
+var clinic_controller_LabSalesTasks_dataSync =require('../controllers/clinic_Data_controllers/Lab_Sales_Tasks/data_sync.js');
 
 
 
