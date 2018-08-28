@@ -40,8 +40,8 @@
 				 		//---------------------UPDATING DAILY INCOMES PROMISE----------------
 					 		let upDateDailyIncome = function(){
 					 	
-					 						 qry_action.query('update daily_incomes set IS_CON_AMOUNT = ?,IS_LAB_AMOUNT =?,IS_PROCE_AMOUNT =?,IS_PHARM_AMOUNT =?,'+
-					 						 	',IS_RAD_AMOUNT = ?,IS_DEN_AMOUNT = ?,IS_UTILITIES_AMOUNT = ?,IS_EXTRA_AMOUNT =?,IS_MATERNITY_AMOUNT = ?,  '
+					 						 qry_action.query('update daily_incomes set IS_CON_AMOUNT = ?,IS_LAB_AMOUNT =?,IS_PROCE_AMOUNT =?,IS_PHARM_AMOUNT =?'+
+					 						 	',IS_RAD_AMOUNT = ?,IS_DEN_AMOUNT = ?,IS_UTILITIES_AMOUNT = ?,IS_EXTRA_AMOUNT = ?,IS_MATERNITY_AMOUNT = ?,  '+
 					 						 	 'IS_SYNC_STATUS = ? where is_date = ? and is_mci_code = ?',
 					 						 	[row.IS_CON_AMOUNT,row.IS_LAB_AMOUNT,row.IS_PROCE_AMOUNT,row.IS_PHARM_AMOUNT,
 					 						 	row.IS_RAD_AMOUNT,row.IS_DEN_AMOUNT,row.IS_UTILITIES_AMOUNT,row.IS_EXTRA_AMOUNT,row.IS_MATERNITY_AMOUNT,
@@ -166,7 +166,7 @@
 				 						
 
 				 				//---------Getting all the users with the same access code------
-				 				qry_action.query('select * from users_info where ui_mci_access_code = ?',rowM.DI_MCI_CODE,function(err,results){
+				 				qry_action.query('select * from users_info where ui_mci_access_code = ?',rowM.IS_MCI_CODE,function(err,results){
 				 					if (err){
 				 					
 
