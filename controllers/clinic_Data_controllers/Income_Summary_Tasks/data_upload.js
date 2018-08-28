@@ -43,9 +43,9 @@
 					 						 qry_action.query('update daily_incomes set IS_CON_AMOUNT = ?,IS_LAB_AMOUNT =?,IS_PROCE_AMOUNT =?,IS_PHARM_AMOUNT =?'+
 					 						 	',IS_RAD_AMOUNT = ?,IS_DEN_AMOUNT = ?,IS_UTILITIES_AMOUNT = ?,IS_EXTRA_AMOUNT = ?,IS_MATERNITY_AMOUNT = ?,  '+
 					 						 	 'IS_SYNC_STATUS = ? where is_date = ? and is_mci_code = ?',
-					 						 	[row.IS_CON_AMOUNT,row.IS_LAB_AMOUNT,row.IS_PROCE_AMOUNT,row.IS_PHARM_AMOUNT,
-					 						 	row.IS_RAD_AMOUNT,row.IS_DEN_AMOUNT,row.IS_UTILITIES_AMOUNT,row.IS_EXTRA_AMOUNT,row.IS_MATERNITY_AMOUNT,
+					 						 	[row.IS_CON_AMOUNT,row.IS_LAB_AMOUNT,row.IS_PROCE_AMOUNT,row.IS_PHARM_AMOUNT,row.IS_RAD_AMOUNT,row.IS_DEN_AMOUNT,row.IS_UTILITIES_AMOUNT,row.IS_EXTRA_AMOUNT,row.IS_MATERNITY_AMOUNT,
 					 						 	'N',row.IS_DATE,row.IS_MCI_CODE] , function(err, results) {
+					 						 	
 			               if (err) {
 			               	reject('error executing the query');
 

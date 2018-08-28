@@ -45,7 +45,7 @@ var m_time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
 		
 			//-----------------Geting the record-----------------------------
 
-			qry_action.query('select A.*,B.* from income_summary A join income_summarysync B on A.is_id = B.iss_di_id where A.is_mci_code =? and B.iss_sync_status =?',
+			qry_action.query('select A.*,B.* from income_summary A join income_summary_sync B on A.is_id = B.iss_di_id where A.is_mci_code =? and B.iss_sync_status =?',
     [reqDetails.accessCode,'N'], function (err, results){
     	   if (err){
    
